@@ -3,7 +3,7 @@ const router = new express.Router();
 
 // ===
 
-const { getAlladmins, getAdminById, addAdmin, updateAdmin, removeAdmin } = require('../controllers/admin.controller');
+const { getAlladmins, getAdminById, addAdmin, updateAdminForAdmin, removeAdmin } = require('../controllers/admin.controller');
 
 // ===
 
@@ -20,7 +20,7 @@ router.prefix("/", (adminRouter) => {
     adminRouter.get("/", getAlladmins);
     adminRouter.get("/:id", getAdminById);
     adminRouter.post("/", addAdmin);
-    adminRouter.put("/:id", updateAdmin);
+    adminRouter.put("/:id", updateAdminForAdmin);
     adminRouter.delete("/:id", removeAdmin);
 });
 

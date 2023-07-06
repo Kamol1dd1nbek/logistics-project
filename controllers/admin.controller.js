@@ -1,5 +1,6 @@
-const { adminValidation } = require("../../Chala/itInfo/validations/admin.validation")
+const { adminValidation } = require("../validations/admin.validation");
 const pool = require("../config/db");
+const bcrypt = require('bcrypt');
 // ===
 
 const addAdmin = async (req, res) => {
@@ -19,7 +20,14 @@ const addAdmin = async (req, res) => {
         password
     } = value;
 
-    console.log(full_name);
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    let query = "INSERT INTO admin (full_name, user_name, phone_number, email, tg_link, description, hashed_password)";
+    let values = [ full_name, user_name, phone_number, email, tg_link, description, hashedPassword ];
+
+    const admin = await pool.query(query, values);
+
+// at proccess
 }
 
 const getAlladmins = async (req, res) => {
